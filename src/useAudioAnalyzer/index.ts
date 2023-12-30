@@ -1,0 +1,1 @@
+export {default as useAudioAnalyzer} from './useAudioAnalyzer'
