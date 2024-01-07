@@ -1,12 +1,13 @@
 import { useFrame } from "@react-three/fiber";
-import { useAudioPlayer } from "../../AudioPlayerContext";
-import { useAudioAnalyzer } from "../../useAudioAnalyzer";
-import { useMemo, useRef } from "react";
+import { useAudioPlayer } from "../../../AudioPlayerContext";
+import { ReactElement, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { useMicrophone } from "../../MicrophoneContext";
+import { useMicrophone } from "../../../MicrophoneContext";
 import { useSliderBlade, useTweakpane } from "react-tweakpane";
+import { useAudioAnalyzer } from "../../../hooks/useAudioAnalyzer";
+import AudioAnalyzerContainer from "../../../components/AudioVisualizerContainer/AudioVisualizerContainer";
 
-const BasicVisualizer = () => {
+const BasicVisualizer = (): ReactElement => {
   const meshRef =
     useRef<
       THREE.Mesh<
@@ -19,14 +20,15 @@ const BasicVisualizer = () => {
   const colorRef = useRef<number>(1);
   const scaleRef = useRef<number>(1);
 
-  const { audioStream: playerStream, isPlaying } = useAudioPlayer();
-  const { audioStream: microphoneStream, isRecording } = useMicrophone();
   const pane = useTweakpane(
     { position: { x: 1, y: 1, z: 0 } },
     {
       title: "Basic Visualization",
     }
   );
+
+  const { audioStream: playerStream, isPlaying } = useAudioPlayer();
+  const { audioStream: microphoneStream, isRecording } = useMicrophone();
 
   const [amplitudeDecay] = useSliderBlade(pane, {
     label: "Max Amp. Decay Multiplier",
@@ -131,4 +133,11 @@ const BasicVisualizer = () => {
   );
 };
 
-export default BasicVisualizer;
+const WrappedVisualizer = () => {
+  return (
+    <AudioAnalyzerContainer>
+      <BasicVisualizer />
+    </AudioAnalyzerContainer>
+  );
+};
+export default WrappedVisualizer;

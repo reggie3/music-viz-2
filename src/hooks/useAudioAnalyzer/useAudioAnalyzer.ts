@@ -1,8 +1,8 @@
 // useAudioAnalyzer.ts
 
 import { useEffect, useRef } from "react";
-import { useAudioPlayer } from "../AudioPlayerContext";
-import { useMicrophone } from "../MicrophoneContext";
+import { useAudioPlayer } from "../../AudioPlayerContext";
+import { useMicrophone } from "../../MicrophoneContext";
 
 interface AudioAnalyzerData {
   frequencyData: Uint8Array | null;

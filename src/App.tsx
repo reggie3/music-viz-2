@@ -7,13 +7,17 @@ import { AudioPlayerProvider } from "./AudioPlayerContext";
 import { MicrophoneProvider } from "./MicrophoneContext";
 import { AudioVisualizerContainer } from "./AudioVisualizerContainer";
 import "./global.css";
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import { RouterProvider } from "@tanstack/react-router";
+import router from "./router";
 
 function App() {
   return (
     <ThemeProvider theme={hackerTheme}>
       <CssBaseline />
+      <RouterProvider router={router} />
 
-      <AudioPlayerProvider>
+      {/* <AudioPlayerProvider>
         <MicrophoneProvider>
           <Container
             maxWidth={false}
@@ -24,7 +28,7 @@ function App() {
             <AudioVisualizerContainer />
           </Container>
         </MicrophoneProvider>
-      </AudioPlayerProvider>
+      </AudioPlayerProvider> */}
     </ThemeProvider>
   );
 }

@@ -1,7 +1,7 @@
 // AudioPlayer.tsx
 
 import React, { useEffect, useRef } from "react";
-import { useAudioPlayer } from "../AudioPlayerContext";
+import { useAudioPlayer } from "../../AudioPlayerContext";
 
 interface AudioPlayerProps {
   src: string;

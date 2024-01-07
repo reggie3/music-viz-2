@@ -1,44 +1,55 @@
 import { createTheme } from "@mui/material/styles";
 
-const hackerTheme = createTheme({
-  typography: {
-    fontFamily: "Roboto, sans-serif",
-    h1: {
-      fontFamily: "Orbitron, sans-serif",
-    }
-  },
+const theme = createTheme({
   palette: {
+    mode: "dark",
     primary: {
-      light: "#4A90E2", // Light blue
-      main: "#0066CC", // Blue
-      dark: "#003366", // Dark blue
-      contrastText: "#FFFFFF", // White text on blue
+      main: "#2196f3",
     },
     secondary: {
-      light: "#FF9F7D", // Light orange
-      main: "#FF5722", // Orange
-      dark: "#BF360C", // Dark orange
-      contrastText: "#FFFFFF", // White text on orange
+      main: "#ff4081",
     },
     background: {
-      default: "#1A1A1A", // Dark background
-      paper: "#F0F0F0", // Light paper background
+      default: "#121212",
+      paper: "#1e1e1e",
     },
     text: {
-      primary: "#FFFFFF", // White text
-      secondary: "#CCCCCC", // Light gray text
+      primary: "#ffffff",
+      secondary: "rgba(255, 255, 255, 0.7)",
     },
+  },
+  typography: {
+    fontFamily: "Roboto, Arial, sans-serif",
+    h1: {
+      fontSize: "2.5rem",
+      fontWeight: 500,
+    },
+    h2: {
+      fontSize: "2rem",
+      fontWeight: 500,
+    },
+    h3: {
+      fontSize: "1.75rem",
+      fontWeight: 500,
+    },
+  },
+  shape: {
+    borderRadius: 8,
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
+          textTransform: "none",
         },
-        contained: {
-          backgroundColor: "#0066CC", // Blue background for buttons
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: "#64b5f6", // Link color
           "&:hover": {
-            backgroundColor: "#4A90E2", // Light blue on hover
+            textDecoration: "underline",
           },
         },
       },
@@ -46,4 +57,4 @@ const hackerTheme = createTheme({
   },
 });
 
-export default hackerTheme;
+export default theme;

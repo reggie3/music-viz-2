@@ -38,13 +38,22 @@ const Toolbar = () => {
       flexDirection={"row"}
       position={"absolute"}
       top={0}
-      zIndex={10}
+      zIndex={100}
+      justifyContent={"center"}
     >
       <Button size="small" variant="outlined" onClick={toggleRecording}>
-        {isRecording ? <MicOffIcon /> : <MicIcon />}
+        {isRecording ? (
+          <MicOffIcon fontSize="small" />
+        ) : (
+          <MicIcon fontSize="small" />
+        )}
       </Button>
       <Button size="small" variant="outlined" onClick={togglePlaying}>
-        {isPlaying ? <PauseCircleOutlineIcon /> : <PlayCircleOutlineIcon />}
+        {isPlaying ? (
+          <PauseCircleOutlineIcon fontSize="small" />
+        ) : (
+          <PlayCircleOutlineIcon fontSize="small" />
+        )}
       </Button>
     </Box>
   );

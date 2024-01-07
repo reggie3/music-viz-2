@@ -1,4 +1,7 @@
+#root {
+  background-color: black;
+}
 /* Tweakpane container */
-.tp-dfwv{
-    z-index: 15;
+.tp-dfwv {
+  z-index: 15;
 }
