@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { Box } from "@mui/material";
 import { AudioPlayer } from "../AudioPlayer";
 import { Toolbar } from "../../Toolbar";
+import FrequencyBarViz from "../FrequencyBarViz/FrequencyBarViz";
 
 const AudioAnalyzerContainer = ({ children }: { children: ReactElement }) => {
   return (
@@ -32,9 +33,9 @@ const AudioAnalyzerContainer = ({ children }: { children: ReactElement }) => {
           intensity={Math.PI}
         />
         <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-
         {children}
       </Canvas>
+      <FrequencyBarViz isVisible />
     </Box>
   );
 };

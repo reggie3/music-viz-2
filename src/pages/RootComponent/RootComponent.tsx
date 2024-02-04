@@ -26,6 +26,12 @@ function RootComponent() {
         >
           Basic Visualization
         </Link>
+        <Link
+          to="/music-visualizations/scale-animation"
+          activeOptions={{ exact: true }}
+        >
+          Scale Animation
+        </Link>
       </Box>
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />

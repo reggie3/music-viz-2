@@ -9,6 +9,7 @@ import { Home } from "./pages/Home";
 import { RootComponent } from "./pages/RootComponent";
 import { BasicViz } from "./pages/MusicVisualizations/BasicViz";
 import { MusicVisualizations } from "./pages/MusicVisualizations";
+import Scale from "./pages/Animation/Scale";
 
 const rootRoute = new RootRoute({
   component: RootComponent,
@@ -35,11 +36,17 @@ const basicVizRoute = new Route({
   path: "/basic-visualization",
   component: BasicViz,
 });
+const scaleAnimationRoute = new Route({
+  getParentRoute: () => musicVisualizationRoute,
+  path: "/scale-animation",
+  component: Scale,
+});
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
   musicVisualizationRoute,
   basicVizRoute,
+  scaleAnimationRoute,
 ]);
 
 const router = new Router({ routeTree, notFoundRoute });

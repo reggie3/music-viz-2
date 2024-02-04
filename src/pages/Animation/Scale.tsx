@@ -1,22 +1,12 @@
-import { useSpring, animated } from "@react-spring/three";
-import React, { useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
+import { RotatingBox } from "../../components/RotatingBox";
 
 const ScaleAnimation = () => {
-  const myMesh = React.useRef();
-  const [active, setActive] = useState(false);
-  const { scale } = useSpring({ scale: active ? 1.5 : 1 });
-
   return (
-    <Canvas>
-      <animated.mesh
-        scale={scale}
-        onClick={() => setActive(!active)}
-        ref={myMesh}
-      >
-        <boxGeometry />
-        <meshPhongMaterial color="royalblue" />
-      </animated.mesh>
+    <Canvas data-testid="scale">
+      <ambientLight intensity={0.1} />
+      <directionalLight />
+      <RotatingBox />
     </Canvas>
   );
 };

@@ -9,7 +9,14 @@ interface AudioAnalyzerData {
   timeDomainData: Uint8Array | null;
   currentAverageAmplitude: number;
   maxAmplitude: number;
+  watchedBuffersAmplitude: number[];
 }
+
+interface AnalysisConfig {
+  buffersToWatch?: number[];
+}
+
+const BUFFER_SIZE = 64;
 
 const useAudioAnalyzer = (audioStream: MediaStream | null) => {
   const analyser = useRef<AnalyserNode | null>(null);
@@ -25,7 +32,7 @@ const useAudioAnalyzer = (audioStream: MediaStream | null) => {
 
     const audioContext = new window.AudioContext();
     analyser.current = audioContext.createAnalyser();
-    analyser.current.fftSize = 256; // You can adjust this value based on your needs
+    analyser.current.fftSize = BUFFER_SIZE; // You can adjust this value based on your needs
     const bufferLength = analyser.current.frequencyBinCount;
     freqDataRef.current = new Uint8Array(bufferLength);
     timeDomainDataRef.current = new Uint8Array(analyser.current.fftSize);
@@ -50,7 +57,9 @@ const useAudioAnalyzer = (audioStream: MediaStream | null) => {
     maxAmplitudeRef.current *= decay * delta;
   };
 
-  const getCurrentAnalysisData = (): AudioAnalyzerData | null => {
+  const getCurrentAnalysisData = (
+    config?: AnalysisConfig
+  ): AudioAnalyzerData | null => {
     if (
       !analyser.current ||
       !freqDataRef.current ||
@@ -73,15 +82,29 @@ const useAudioAnalyzer = (audioStream: MediaStream | null) => {
       maxAmplitudeRef.current = currentAverageAmplitude;
     }
 
+    const watchedBuffersAmplitude: number[] = [];
+
+    if (config?.buffersToWatch) {
+      freqDataRef.current.forEach((data, index) => {
+        watchedBuffersAmplitude[index] = data;
+      });
+    }
+
     return {
       frequencyData: freqDataRef.current,
       timeDomainData: timeDomainDataRef.current,
       currentAverageAmplitude,
       maxAmplitude: maxAmplitudeRef.current,
+      watchedBuffersAmplitude,
     };
   };
 
-  return { getCurrentAnalysisData, decayMaxAmplitude };
+  return {
+    getCurrentAnalysisData,
+    decayMaxAmplitude,
+    fftSize: analyser.current?.fftSize,
+    bufferLength: analyser.current?.frequencyBinCount,
+  };
 };
 
 export default useAudioAnalyzer;
